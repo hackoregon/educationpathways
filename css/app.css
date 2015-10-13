@@ -1,0 +1,18 @@
+#logodiv {
+	float: left;
+	margin-top: 10px;
+}
+
+.menudiv {
+	float: right;
+	margin-left: 600px;
+	margin-top: 15px;
+}
+
+.break {
+	clear: both;
+}
+
+#menudiv li {
+	list-style: none;
+}
