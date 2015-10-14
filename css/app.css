@@ -1,3 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,900italic);
+
+body {
+	font-family: 'Lato', sans-serif;
+}
 #logodiv {
 	float: left;
 	margin-top: 10px;
