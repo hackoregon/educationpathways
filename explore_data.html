@@ -90,49 +90,6 @@
         </div>
     </div>
   </div>
-
-	<select id="SadFace">
-	  <script>
-  		SetFilters("SadFace", "gender");
-
-  		function SetFilters(ID, ParameterName) {
-  			var URL = "http://data.econw.com/sankey/meta/" + ParameterName + "/?format=json";
-
-  			//var Data = $.getJSON(URL,)
-
-  			var Data = {};
-
-
-  			var xhr = new XMLHttpRequest();
-  			xhr.open("GET", URL, false);
-  			xhr.send();
-
-
-  			//$.getJSON("ajax/test.json", function (URL) {
-  			//    var items = [];
-  			//    $.each(data, function (key, val) {
-  			//        items.push("<li id='" + key + "'>" + val + "</li>");
-  			//    });
-  			//});
-
-  			//$.getJSON(URL, function (data) {
-  			//    data.toString();
-  			//});
-
-  			//$.ajax({
-  			//    dataType: "json",
-  			//    url: URL,
-  			//    data: Data
-  			//});
-
-  			for (var Value in Data) {
-  				$("#" + ID).append("<option value=" + "'Value'" + ">" + Value + "</option>");
-  			}
-
-  		}
-    </script>
-	</select>
-
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/app.js"></script>
