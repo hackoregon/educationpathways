@@ -1,18 +1,33 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,900italic);
 
 body {
-	font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
-
 .navbar-brand{
-	padding: 5px;
+  padding: 5px;
 }
 img.nav-logo{
-	height: 39px;
+  height: 39px;
 }
 h1,h2,h3{
-	font-weight: 900;
+  font-weight: 900;
 }
 .navbar-right li {
-	font-size: 20px;
+  font-size: 20px;
+}
+.grayfont {
+  color: #808285;
+}
+.bluefont {
+  color: #156786;
+}
+.greenfont {
+  color: #5cbc87;
+}
+h2.storyfontcolor {
+  color: #156786;
+}
+.footer {
+  font-family: 'Lato', sans-serif;
+  color: #808285; 
 }
