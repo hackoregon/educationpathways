@@ -10,3 +10,6 @@ body {
 img.nav-logo{
 	height: 39px;
 }
+h1,h2,h3{
+	font-weight: 900;
+}
