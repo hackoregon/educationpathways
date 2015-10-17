@@ -3,3 +3,13 @@
 body {
 	font-family: 'Lato', sans-serif;
 }
+
+.navbar-brand{
+	padding: 5px;
+}
+img.nav-logo{
+	height: 39px;
+}
+h1,h2,h3{
+	font-weight: 900;
+}
