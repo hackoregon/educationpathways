@@ -1,18 +1,5 @@
-#logodiv {
-	float: left;
-	margin-top: 10px;
-}
+@import url(https://fonts.googleapis.com/css?family=Lato:400,900italic);
 
-.menudiv {
-	float: right;
-	margin-left: 600px;
-	margin-top: 15px;
-}
-
-.break {
-	clear: both;
-}
-
-#menudiv li {
-	list-style: none;
+body {
+	font-family: 'Lato', sans-serif;
 }
