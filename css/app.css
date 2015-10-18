@@ -3,14 +3,8 @@
 body {
   font-family: 'Lato', sans-serif;
 }
-.navbar-brand{
-  padding: 5px;
-}
 h1,h2,h3{
   font-weight: 900;
-}
-.navbar-right li {
-  font-size: 20px;
 }
 .grayfont {
   color: #808285;
@@ -26,5 +20,54 @@ h2.storyfontcolor {
 }
 .footer {
   font-family: 'Lato', sans-serif;
-  color: #808285; 
+  color: #808285;
+}
+.nav ul {
+  list-style: none;
+  background-color: #dcc871;
+  text-align: center;
+  padding: 0;
+}
+.nav li {
+  font-size: 16px;
+  line-height: 40px;
+  height: 40px;
+	text-align: center;
+  border-bottom: 1px solid #fff;
+
+}
+.nav a {
+  text-decoration: none;
+  color: #444;
+  display: block;
+  transition: .3s background-color;
+}
+.nav a:hover {
+  background-color: #F1E9C6;
+}
+.nav a.active {
+  background-color: #dcc871;
+  color: #444;
+  cursor: default;
+}
+@media screen and (min-width: 540px) {
+  .nav li {
+		font-size: 20px;
+    width: 180px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+  }
+	.nav a.active {
+	  background-color: #fff;
+	  color: #444;
+	  cursor: default;
+	}
+
+  /* Option 1 - Display Inline */
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
 }
