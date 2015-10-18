@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+<body onLoad="createDistributionGraphs()">
   <div class="nav">
     <ul>
       <li>
@@ -50,7 +50,19 @@
   <div class="container-fluid">
     <div class="row">
       <img class="img-responsive col-sm-2" src="http://placehold.it/100x200" alt="" />
-      <img class="img-responsive col-sm-10" src="http://placehold.it/500x200" alt="" />
+        <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
+        <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
+        <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
+        <div id="td-4yr" class="img-responsive col-sm-2" >
+        <h4>Time Distribution<br/>4-year</h4>
+        </div>  <!-- 4-year -->
+        <div id="td-2yr" class="img-responsive col-sm-2" >
+            <h4>Time Distribution<br/>2-year</h4>
+        </div>  <!-- 2-year -->
+        <div id="td-hs" class="img-responsive col-sm-2" >
+            <h4>Time Distribution<br/>HS Diploma</h4>
+        </div>  <!-- HS -->
+      <img class="img-responsive col-sm-10" src="http://placehold.it/500x100" alt="" />
     </div>
   </div>
   <div class="container-fluid">
@@ -88,6 +100,14 @@
       <img class="img-responsive col-sm-6" src="http://placehold.it/300x200" alt="" />
     </div>
   </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="./js/timeDistributionGraph.js"></script>
+  <script>
+function createDistributionGraphs() {
+    createDistributionGraph("#td-4yr", "data/4yrbardata.csv");
+    createDistributionGraph("#td-2yr", "data/2yrbardata.csv");
+    createDistributionGraph("#td-hs", "data/triedbardata.csv");
+}
+  </script>
   </body>
 </html>
