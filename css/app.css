@@ -71,3 +71,28 @@ h2.storyfontcolor {
     margin-right: -4px;
   }
 }
+
+/* Following styles are for the time distribution graphs */
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+.x.axis path {
+    display: none;
+}
+
+g.g > rect {
+    transition: .3s ease-in-out;
+}
+
+.shrink > rect {
+    height: 0;
+    y: 249;
+}
