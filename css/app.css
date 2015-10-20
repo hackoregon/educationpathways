@@ -55,7 +55,7 @@ h2.storyfontcolor {
 .nav li.menu-item{
   display:none;
 }
-@media screen and (min-width: 515px) {
+@media screen and (min-width: 530px) {
   .nav li {
 		font-size: 16px;
     width: 130px;
