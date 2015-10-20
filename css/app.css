@@ -115,3 +115,9 @@ g.g > rect {
     height: 0;
     y: 249;
 }
+
+.wrapper {
+
+  margin: auto 0;
+  float: none;
+}
