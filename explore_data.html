@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   </head>
-  <body>
+  <body onLoad="javascript: initializeControls();">
     <div class="nav">
       <ul>
         <li class="brand">
@@ -38,7 +38,8 @@
   </div>
   <div class="container">
     <div class="row">
-      <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" />
+      <!-- <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" /> -->
+        <div class="img-responsive col-sm-3" id="sankey-filter"></div>
       <img class="img-responsive col-sm-9" src="http://placehold.it/500x200" alt="" />
     </div>
   </div>
@@ -52,7 +53,8 @@
   </div>
   <div class="container">
     <div class="row">
-      <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" />
+      <!--<img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" />-->
+        <div class="img-responsive col-sm-3" id="comparison-filter"></div>
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
@@ -63,7 +65,7 @@
             <h4>Time Distribution<br/>2-year</h4>
         </div>  <!-- 2-year -->
         <div id="td-hs" class="img-responsive col-sm-3" >
-            <h4>Time Distribution<br/>HS Diploma</h4>
+            <h4>Time Distribution<br/>No Diploma</h4>
         </div>  <!-- HS -->
       <img class="img-responsive col-sm-9" src="http://placehold.it/500x100" alt="" />
     </div>
@@ -108,12 +110,61 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   <script src="./js/timeDistributionGraph.js"></script>
+    <script src="./js/buildFilterControls.js"></script>
   <script>
-function createDistributionGraphs() {
-    createDistributionGraph("#td-4yr", "data/4yrbardata.csv");
-    createDistributionGraph("#td-2yr", "data/2yrbardata.csv");
-    createDistributionGraph("#td-hs", "data/triedbardata.csv");
-}
+      var sankeyFilters = {
+          gender: '',
+          ethnicity: '',
+          poverty: '',
+          lep: '',
+          meet_math: '',
+          meet_read: '',
+          district: '',
+          hs_name: '',
+          query: function () {
+              var params = [];
+              for (var key in this) {
+                  if (typeof this[key] !== 'function' && this[key]) {
+                      params.push('&' + key + '=' + this[key]);
+                  }
+              }
+              return params.join();
+          },
+          redraw: function() {
+              alert("Drew the Sankey diagram!");
+          }
+      };
+
+      var comparisonFilters = {
+          gender: '',
+          ethnicity: '',
+          poverty: '',
+          lep: '',
+          meet_math: '',
+          meet_read: '',
+          district: '',
+          hs_name: '',
+          query: function () {
+              var params = [];
+              for (var key in this) {
+                  if (typeof this[key] !== 'function' && this[key]) {
+                      params.push('&' + key + '=' + this[key]);
+                  }
+              }
+              return params.join();
+          },
+          redraw: function() {
+              alert("Drew the comparison diagrams!");
+          }
+      };
+
+      function initializeControls() {
+          buildSankeyFilterControls("sankey-filter", sankeyFilters);
+          buildComparisonFilterControls("comparison-filter", comparisonFilters);
+          createDistributionGraph("#td-4yr", "data/4yrbardata.csv");
+          createDistributionGraph("#td-2yr", "data/2yrbardata.csv");
+          createDistributionGraph("#td-hs", "data/triedbardata.csv");
+      }
   </script>
   </body>
 </html>
