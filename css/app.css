@@ -123,7 +123,7 @@ g.g > rect {
         margin: 20px;
     }
 .panel-heading [data-toggle="collapse"]:after {
-    font-family: 'Glyphicons Halflings';
+    font-family: 'Lato', sans-serif;
     content: "e072"; /* "play" icon */
     float: right;
     color: #F58723;

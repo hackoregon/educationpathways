@@ -18,14 +18,12 @@
           </a>
         </li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="explore_data.html" class="active">Explore the Data</a></li>
+        <li><a href="explore_data.html">Explore the Data</a></li>
+        <li><a href="faq.html" class="active">FAQ</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
     </div>
         <div class="container">
-        <br />
-        <br />
-
         <div class="panel-group" id="accordion">
             <div class="faqHeader">General questions</div>
             <div class="panel panel-default">
@@ -183,6 +181,38 @@
                 </div>
             </div>
         </div>
-    </div>
+    <style>
+        .faqHeader {
+            font-size: 27px;
+            margin: 20px;
+        }
+
+        .panel-heading [data-toggle="collapse"]:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e072"; /* "play" icon */
+            float: right;
+            color: #F58723;
+            font-size: 18px;
+            line-height: 22px;
+            /* rotate "play" icon from > (right arrow) to down arrow */
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+
+        .panel-heading [data-toggle="collapse"].collapsed:after {
+            /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            color: #454444;
+        }
+    </style>
+</div>
 </body>
+
 </html>
