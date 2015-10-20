@@ -67,6 +67,27 @@ function buildComparisonFilterControls(divId, filterObject) {
     var nofilter = document.createElement('option');
     nofilter.appendChild(document.createTextNode('No filter'));
     select.appendChild(nofilter);
+    // begin wonky part - need to hand-wire these options and not take the options from the API.
+    var o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['ethnicity'] + ": " + "White"));
+    select.appendChild(o);
+    o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['ethnicity'] + ": " + "Non-White"));
+    select.appendChild(o);
+
+    o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['meet_math'] + ": " + "Met or exceeded expectations"));
+    select.appendChild(o);
+    o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['meet_math'] + ": " + "Did not meet expectations"));
+    select.appendChild(o);
+    o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['meet_read'] + ": " + "Met or exceeded expectations"));
+    select.appendChild(o);
+    o = document.createElement('option');
+    o.appendChild(document.createTextNode(filterLabels['meet_read'] + ": " + "Did not meet expectations"));
+    select.appendChild(o);
+    // end wonky part
 
     select.addEventListener('change', function (e) {
         filterObject[filter] = e.target.value;
@@ -81,7 +102,8 @@ function buildComparisonFilterControls(divId, filterObject) {
     root.appendChild(document.createElement("br"));
 
     Object.keys(filterObject).forEach(function (filter) {
-        if ((typeof filterObject[filter] === 'function') || (filter === 'district') || (filter === 'hs_name')) {
+        if ((typeof filterObject[filter] === 'function') || (filter === 'district') || (filter === 'hs_name') ||
+            (filter === 'meet_read') || (filter === 'meet_math') || (filter === 'ethnicity')) {
             return;
         }
 
