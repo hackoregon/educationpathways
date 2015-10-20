@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/explore_data.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -37,10 +38,17 @@
     </p>
   </div>
   <div class="container">
-    <div class="row">
-      <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" />
-      <img class="img-responsive col-sm-9" src="http://placehold.it/500x200" alt="" />
+    <!-- start of sankey dom elements -->
+    <div id="filters">
+      <h3>Filters</h3>
     </div>
+    <h2>Scale: <span id="scale"></span></h2>
+    <div>
+      <div id="pathfilters" class="tabs"></div>
+    </div>
+    <div id="chart"></div>
+    <script type="text/javascript" src="http://bryzaguy.github.io/oregon-learns-chart/app.js" charset="utf-8"></script>
+    <!-- end of sankey dom elements -->
   </div>
   <div class="container">
     <h3 class="bluefont">

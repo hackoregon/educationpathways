@@ -1,0 +1,110 @@
+* {
+    font-family: sans-serif;
+}
+
+label {
+  display: inline-block;
+  padding: 10px;
+  font-size: 12px;
+}
+
+svg {
+  font: 12px sans-serif;
+}
+
+#chart {
+  height: 400px;
+  width: 900px;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+.filter-container {
+  width: 400px;
+  display: inline-block;
+  padding: 6px;
+}
+
+#filters select,
+#filters label {
+  width: 50%;
+  text-align: right;
+  padding: 0;
+}
+
+#filters label::after {
+  content: ": ";
+}
+
+.tabs {
+  position: relative;
+  cursor: pointer;
+  /* This part sucks */
+  clear: both;
+  margin: 25px 0;
+}
+
+.tabs::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.tab {
+  float: left;
+}
+
+.tab label {
+  background: #eee;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-left: -1px;
+  position: relative;
+  left: 1px;
+}
+
+.tab:first-child label {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.tab:last-child label {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.tab [type=checkbox] {
+  position: absolute;
+  opacity: 0;
+}
+
+[type=checkbox]:checked ~ label {
+  background: #ccc;
+  border-color: #999;
+  box-shadow: 0 4px 9px -6px #999 inset;
+  z-index: 1;
+}
