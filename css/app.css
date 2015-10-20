@@ -18,10 +18,6 @@ h1,h2,h3{
 h2.storyfontcolor {
   color: #156786;
 }
-.footer {
-  font-family: 'Lato', sans-serif;
-  color: #156786;
-}
 .nav ul {
   list-style: none;
   background-color: #dcc871;
@@ -116,8 +112,9 @@ g.g > rect {
     y: 249;
 }
 
-/*<<<<<<< HEAD
+/*styles for footer*/
 .footer {
   background-color: #dcc871;
+  font-family: 'Lato', sans-serif;
+  color: #156786;
 }
-*/
