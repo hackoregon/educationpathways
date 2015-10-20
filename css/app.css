@@ -99,18 +99,6 @@ a.greenfont:hover {
 h2.storyfontcolor {
   color: #156786;
 }
-.grow img {
-  -webkit-transition: all 1s ease;
-     -moz-transition: all 1s ease;
-       -o-transition: all 1s ease;
-      -ms-transition: all 1s ease;
-          transition: all 1s ease;
-}
-
-.grow img:hover {
-  width: 90%;
-  height: 90%;
-}
 /* Following styles are for the time distribution graphs */
 .axis path,
 .axis line {
