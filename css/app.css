@@ -28,13 +28,15 @@ h2.storyfontcolor {
   text-align: center;
   padding: 0;
 }
+.nav img.brand {
+
+}
 .nav li {
   font-size: 16px;
-  line-height: 40px;
-  height: 40px;
+  line-height: 50px;
+  height: 50px;
 	text-align: center;
   border-bottom: 1px solid #fff;
-
 }
 .nav a {
   text-decoration: none;
@@ -50,6 +52,29 @@ h2.storyfontcolor {
   color: #444;
   cursor: default;
 }
+.nav li.menu-item{
+  display:none;
+}
+@media screen and (min-width: 540px) {
+  .nav li {
+		font-size: 20px;
+    width: 180px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    margin-right: -4px;
+  }
+  .nav li.menu-item{
+    display: inline-block;
+  }
+	.nav a.active {
+	  background-color: #fff;
+	  color: #444;
+	  cursor: default;
+	}
+}
+/*fit header logo to screen size < 495*/
 img.header-logo{
   width: auto;
   height: auto;
@@ -60,28 +85,6 @@ img.header-logo{
     height: 100%;
   }
 }
-@media screen and (min-width: 540px) {
-  .nav li {
-		font-size: 20px;
-    width: 180px;
-    border-bottom: none;
-    height: 50px;
-    line-height: 50px;
-    font-size: 1.4em;
-  }
-	.nav a.active {
-	  background-color: #fff;
-	  color: #444;
-	  cursor: default;
-	}
-
-  /* Option 1 - Display Inline */
-  .nav li {
-    display: inline-block;
-    margin-right: -4px;
-  }
-}
-
 /* Following styles are for the time distribution graphs */
 .axis path,
 .axis line {
