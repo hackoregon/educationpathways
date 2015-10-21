@@ -3,21 +3,6 @@
 body {
   font-family: 'Lato', sans-serif;
 }
-h1,h2,h3{
-  font-weight: 900;
-}
-.grayfont {
-  color: #808285;
-}
-.bluefont {
-  color: #156786;
-}
-.greenfont {
-  color: #5cbc87;
-}
-h2.storyfontcolor {
-  color: #156786;
-}
 .nav ul {
   list-style: none;
   background-color: #dcc871;
@@ -87,6 +72,33 @@ img.header-logo{
     height: 100%;
   }
 }
+h1,h2,h3{
+  font-weight: 900;
+}
+a:hover {
+  text-decoration: none;
+}
+.grayfont {
+  color: #808285;
+}
+a .grayfont:hover {
+  color: #404142;
+}
+.bluefont {
+  color: #156786;
+}
+a .bluefont:hover {
+  color: #0D3E50;
+}
+.greenfont {
+  color: #5cbc87;
+}
+a.greenfont:hover {
+  color: #40845E;
+}
+h2.storyfontcolor {
+  color: #156786;
+}
 /* Following styles are for the time distribution graphs */
 .axis path,
 .axis line {
@@ -117,4 +129,7 @@ g.g > rect {
   background-color: #dcc871;
   font-family: 'Lato', sans-serif;
   color: #156786;
+}
+.footer .fa {
+  color: #15678B;
 }
