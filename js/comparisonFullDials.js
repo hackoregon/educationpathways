@@ -89,7 +89,7 @@ var transformData = (function() {
 
 var dial_div = document.getElementById("grad-rate");
 var width = parseInt(dial_div.offsetWidth);
-var height = width / 2;
+var height = width;
 
 // An arc function with all values bound except the endAngle. So, to compute an
 // SVG path string for a given angle, we pass an object with an endAngle
@@ -97,12 +97,12 @@ var height = width / 2;
 var arc = d3.svg.arc()
     .innerRadius(width / 3)
     .outerRadius(width * .475)
-    .startAngle(-Math.PI / 2);
+    .startAngle(Math.PI / 2);
 
 var thinArc = d3.svg.arc()
     .innerRadius(width / 3)
     .outerRadius(width * .35)
-    .startAngle(-Math.PI / 2);
+    .startAngle(Math.PI / 2);
 
 
 var updateGradRate = createGraph('grad-rate');
@@ -233,19 +233,19 @@ function createGraph(id) {
 
     // Add the background arc, from -90 to 90 degrees.
     var background = svg.append("path")
-        .datum({endAngle: Math.PI / 2})
+        .datum({endAngle: 5 * Math.PI / 2})
         .style("fill", "#fff")
         .attr("d", arc);
 
     // Add an inner 'outline' circle for ??clarity??
     var outline = svg.append("path")
-        .datum({endAngle: Math.PI / 2})
+        .datum({endAngle: 5 * Math.PI / 2})
         .style("fill", "#808285")
         .attr("d", thinArc);
 
     // Add the foreground arc in gold, starting at 0 for update effect.
     var foreground = svg.append("path")
-        .datum({endAngle: -Math.PI / 2})
+        .datum({endAngle: Math.PI / 2})
         .style("fill", "#dcc871")
         .attr("d", arc);
 
@@ -253,7 +253,7 @@ function createGraph(id) {
         .attr("xlink:href", "img/icons/" + id + ".svg")
         .attr("width", width / 4)
         .attr("height", width / 4)
-        .attr("transform", "translate(" + -width / 8 + "," + -width / 6 + ")")
+        .attr("transform", "translate(" + -width / 8 + "," + -width / 8 + ")")
 
     // creates the desired movement effect on value update.
     function arcTween(transition, newAngle) {
@@ -276,6 +276,6 @@ function createGraph(id) {
       }
       foreground.transition()
           .duration(750)
-          .call(arcTween, value * Math.PI / 6);
+          .call(arcTween, (2 * value / 3 + 3) * Math.PI / 2);
     }
 }
