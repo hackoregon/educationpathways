@@ -189,12 +189,20 @@
           meet_math: '',
           meet_read: '',
           district: '',
-          hs_name: 'Grant_High_School',
+          hs_name: '',
           query: function () {
               var params = [];
               for (var key in this) {
                   if (typeof this[key] !== 'function' && this[key]) {
-                      params.push('&' + key + '=' + this[key]);
+                      // if the value contains commas treat it as a list
+                      if (this[key].indexOf(',') == -1) {
+                          params.push('&' + key + '=' + this[key]);
+                      } else {
+                          var splitValue = this[key].split(',');
+                          splitValue.forEach(function(value) {
+                              params.push('&' + key + '=' + value);
+                          });
+                      }
                   }
               }
               return params.join(separator="");
