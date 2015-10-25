@@ -84,6 +84,16 @@ function buildComparisonFilterControls(divId, filterObject) {
                 }
             });
         } else {
+            // clear existing filters, then apply new ones.
+            Object.keys(filterObject).forEach(function (filter) {
+                // begin wonky part - need to hand-wire these options and not take the options from the API.  Has to be done
+                // in the loop to keep "filter" value in context so it can be used in the event listener.
+                if ((typeof filterObject[filter] === 'function') || (filter === 'district') || (filter === 'hs_name')) {
+                    return;  // don't clear these - they're treated separately.
+                } else {
+                    filterObject[filter] = '';
+                }
+            });
             var splits = e.target.value.split(":");
             filterObject[splits[0]] = splits[1];
         }
