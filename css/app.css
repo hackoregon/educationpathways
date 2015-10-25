@@ -90,6 +90,15 @@ a .grayfont:hover {
 a .bluefont:hover {
   color: #0D3E50;
 }
+
+a {
+    color: #5cbc87;
+}
+
+a:hover {
+    color: #40845E;
+
+}
 .greenfont {
   color: #5cbc87;
 }
