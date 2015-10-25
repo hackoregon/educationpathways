@@ -2,8 +2,9 @@
  * Created by cvonsee on 10/17/15.
  */
 function createDistributionGraph(divId, dataFileName) {
+    var bar_div = document.getElementById("td-4yr");
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 300 - margin.left - margin.right,
+        width = parseInt(bar_div.offsetWidth) - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
     var x0 = d3.scale.ordinal()
