@@ -139,7 +139,9 @@ g.g > rect {
   color: #156786;
 }
 .footer-brand {
-  height
+  height: 56px;
+  margin: 10px 10px 10px 10px;
+  text-align: center;
 }
 .footer .fa {
   color: #15678B;
