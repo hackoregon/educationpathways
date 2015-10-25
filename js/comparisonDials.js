@@ -99,10 +99,10 @@ var arc = d3.svg.arc()
     .outerRadius(width * .475)
     .startAngle(-Math.PI / 2);
 
-var thinArc = d3.svg.arc()
-    .innerRadius(width / 3)
-    .outerRadius(width * .35)
-    .startAngle(-Math.PI / 2);
+// var thinArc = d3.svg.arc()
+//     .innerRadius(width / 3)
+//     .outerRadius(width * .35)
+//     .startAngle(-Math.PI / 2);
 
 
 var updateGradRate = createGraph('grad-rate');
@@ -111,11 +111,30 @@ var updateTwoRate = createGraph('two-rate');
 var updatePovertyRate = createGraph('poverty-rate');
 var updatePostEnrollRate = createGraph('post-enroll-rate');
 var updateHLAARate = createGraph('HLAA-rate');
-var filter = "";
 var group = "hs_name";
 var rates_array = [];
-var current_rates = {};
-var poverty_rates = {};
+var current_rates = [];
+var poverty_rates = [];
+var current_poverty = 0;
+var hs_pov_mean = 0;
+var hs_pov_sd = 0;
+var dist_pov_mean = 0;
+var dist_pov_sd = 0;
+
+d3.csv('data/poverty_rates.csv', function (data) {
+    data.forEach( function (d) {
+        // converts data from strings to integers.  I don't know how.
+        d.inPov = +d.inPov;
+        d.notPov = +d.notPov;
+        d.povRate = +d.povRate;
+    });
+    hs_pov_mean = data[data.length - 4].povRate;
+    hs_pov_sd = data[data.length - 3].povRate;
+    dist_pov_mean = data[data.length - 2].povRate;
+    dist_pov_sd = data[data.length - 1].povRate;
+    data.splice(data.length - 4, 4)
+    poverty_rates = data;
+});
 
 d3.csv('data/rate_distributions.csv', function (data) {
     data.forEach( function (d) {
@@ -134,7 +153,7 @@ d3.csv('data/rate_distributions.csv', function (data) {
     });
     rates_array = data;
     //create filters / select initial row
-    distributions = rowSelect(data, filter, group);
+    current_rates = rowSelect(data, "", group);
     //updatecharts
     updateData();
 });
@@ -171,6 +190,14 @@ function updateData() {
         var hs_diploma = codeSum(filterData(transformData(data), ['D']));
         var graduated_2_yr = total_students - graduated_4_yr - hs_diploma - no_diploma;
         var two_rate = graduated_2_yr / total_students;
+        var poverty_rate = -1;
+        var comparison_list = comparisonFilters.query().split("&");
+        var institution_filter = comparison_list[comparison_list.length - 1];
+        for (var i=0; i < poverty_rates.length; i++) {
+            if (poverty_rates[i].filter === "&" + institution_filter) {
+                poverty_rate = poverty_rates[i].povRate;
+            }
+        }
         var enrolled_2_yr = codeSum(filterData(transformData(data), ['2']));
         var enrolled_4_yr = codeSum(filterData(transformData(data), ['4']));
         var post_enroll_rate = (enrolled_2_yr + enrolled_4_yr) / total_students;
@@ -186,16 +213,22 @@ function updateData() {
             HLAA_rate = (graduated_4_yr + grad_2_only) / (enrolled_2_yr + enrolled_4_yr)
         }
         document.getElementById('comparison-count').innerHTML = "Scale: " + total_students + " students"
-        updateGradRate(zScore(distributions.grad_rate_mean, distributions.grad_rate_sd, grad_rate));
-        updateFourRate(zScore(distributions.four_rate_mean, distributions.four_rate_sd, four_rate));
-        updateTwoRate(zScore(distributions.two_rate_mean, distributions.two_rate_sd, two_rate));
-        updatePovertyRate(0.34);
-        updatePostEnrollRate(zScore(distributions.post_enroll_rate_mean, distributions.post_enroll_rate_sd, post_enroll_rate));
+        updateGradRate(zScore(current_rates.grad_rate_mean, current_rates.grad_rate_sd, grad_rate));
+        updateFourRate(zScore(current_rates.four_rate_mean, current_rates.four_rate_sd, four_rate));
+        updateTwoRate(zScore(current_rates.two_rate_mean, current_rates.two_rate_sd, two_rate));
+        if (poverty_rate === -1) {
+            updatePovertyRate(-3);
+        } else if (group === 'hs_name') {
+            updatePovertyRate(zScore(hs_pov_mean, hs_pov_sd, poverty_rate));
+        } else {
+            updatePovertyRate(zScore(dist_pov_mean, dist_pov_sd, poverty_rate));
+        }
+        updatePostEnrollRate(zScore(current_rates.post_enroll_rate_mean, current_rates.post_enroll_rate_sd, post_enroll_rate));
         if (HLAA_rate === -1) {
             updateHLAARate(-3);
             return;
         }
-        updateHLAARate(zScore(distributions.HLAA_rate_mean, distributions.HLAA_rate_sd, HLAA_rate));
+        updateHLAARate(zScore(current_rates.HLAA_rate_mean, current_rates.HLAA_rate_sd, HLAA_rate));
     });
 }
 
@@ -238,10 +271,10 @@ function createGraph(id) {
         .attr("d", arc);
 
     // Add an inner 'outline' circle for ??clarity??
-    var outline = svg.append("path")
-        .datum({endAngle: Math.PI / 2})
-        .style("fill", "#808285")
-        .attr("d", thinArc);
+    // var outline = svg.append("path")
+    //     .datum({endAngle: Math.PI / 2})
+    //     .style("fill", "#808285")
+    //     .attr("d", thinArc);
 
     // Add the foreground arc in gold, starting at 0 for update effect.
     var foreground = svg.append("path")
@@ -253,7 +286,7 @@ function createGraph(id) {
         .attr("xlink:href", "img/icons/" + id + ".svg")
         .attr("width", width / 4)
         .attr("height", width / 4)
-        .attr("transform", "translate(" + -width / 8 + "," + -width / 6 + ")")
+        .attr("transform", "translate(" + -width / 8 + "," + -3 * width / 16 + ")")
 
     // creates the desired movement effect on value update.
     function arcTween(transition, newAngle) {
@@ -270,9 +303,23 @@ function createGraph(id) {
     // then updates the chart to reflect the new value.
     return function arcUpdate(value) {
       if (value === -3) {
-          background.style("fill", "#808285")
+        background.transition()
+            .style("fill", "#808285")
+            .style("opacity", 0.25)
+        foreground.transition()
+            .style("fill", "#808285")
+            .style("opacity", 0.25)
+        icon.transition()
+            .style("opacity", 0.25)
       } else {
-          background.style("fill", "#fff")
+        background.transition()
+            .style("fill", "#fff")
+            .style("opacity", 1)
+        foreground.transition()
+            .style("fill", "#dcc871")
+            .style("opacity", 1)
+        icon.transition()
+            .style("opacity", 1)
       }
       foreground.transition()
           .duration(750)

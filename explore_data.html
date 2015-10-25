@@ -81,9 +81,9 @@
               As obtaining enough data to make a meaningful statement about rates is not always possible, we've had to remove some schools and districts from the list.  As better data becomes available, we hope to add schools and filters to the options to learn more about performance.
           </p>
         </div>
-        <h2 id='comparison-count'></h2>
         <div class="img-responsive col-sm-12" id="comparison-filter"></div>
         <div>
+            <h2 id='comparison-count'></h2>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="dial" id="grad-rate"></div>
@@ -188,7 +188,7 @@
           lep: '',
           meet_math: '',
           meet_read: '',
-          district: '',
+          district: 'Amity_SD_4J',
           hs_name: '',
           query: function () {
               var params = [];
@@ -205,9 +205,26 @@
                       }
                   }
               }
+              var group = '';
+              if (comparisonFilters.district === '') {
+                  group = 'hs_name';
+              } else {
+                  group = 'district';
+              }
+              current_rates = rowSelect(
+                  rates_array,
+                  params.slice(0, -1).join(separator=""),
+                  group
+              );
               return params.join(separator="");
           },
           redraw: function() {
+          var group = '';
+              if (comparisonFilters.district === '') {
+                  group = 'hs_name';
+              } else {
+                  group = 'district';
+              }
               updateData();
           }
       };
