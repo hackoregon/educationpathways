@@ -28,7 +28,7 @@
     </p>
   </div>
   <div class="container">
-  
+
     <h3 class="bluefont">
       Education Pathways
     </h3>
@@ -51,30 +51,77 @@
   </div>
   <div class="container">
     <h3 class="bluefont">
-      Data Comparisons
+      Time To Graduate
     </h3>
     <p>
-      Cream cheese manchego ricotta. Cheddar mascarpone edam fromage fondue port-salut jarlsberg swiss. Lancashire dolcelatte cheesy feet stinking bishop cheese triangles jarlsberg mozzarella roquefort. Cheese triangles the big cheese cheeseburger cheese slices dolcelatte squirty cheese rubber cheese goat. Hard cheese roquefort pecorino bavarian bergkase smelly cheese cottage cheese cheese strings who moved my cheese. Bavarian bergkase chalk and cheese.
+      Given the degree attained, how long does it take students to graduate?  In the following bar charts, we look at three groups: those that graduate from a four year institution, those that graduate from a two year institution, and those that attend a post-secondary school but do not obtain a degree.
+    </p>
+    <p>
+        In these graphs, "Calendar Months" refers to the time (in years) that passes between the first time a student enrolls and when they graduate or otherwise move on.  "Enrolled Months" discounts from this the time spent not enrolled in a school.
     </p>
   </div>
   <div class="container">
     <div class="row">
-      <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" />
+      <!-- <img class="img-responsive col-sm-3" src="http://placehold.it/100x200" alt="" /> -->
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
         <!--<img class="img-responsive col-sm-2" src="http://placehold.it/100x100" alt="" />-->
-        <div id="td-4yr" class="img-responsive col-sm-3" >
-        <h4>Time Distribution<br/>4-year</h4>
+        <div id="td-4yr" class="img-responsive col-sm-4" >
+        <h4>Time Distribution<br/>4-year Degree</h4>
         </div>  <!-- 4-year -->
-        <div id="td-2yr" class="img-responsive col-sm-3" >
-            <h4>Time Distribution<br/>2-year</h4>
+        <div id="td-2yr" class="img-responsive col-sm-4" >
+            <h4>Time Distribution<br/>2-year Degree</h4>
         </div>  <!-- 2-year -->
-        <div id="td-hs" class="img-responsive col-sm-3" >
-            <h4>Time Distribution<br/>HS Diploma</h4>
+        <div id="td-hs" class="img-responsive col-sm-4" >
+            <h4>Time Distribution<br/>No Degree</h4>
         </div>  <!-- HS -->
-      <img class="img-responsive col-sm-9" src="http://placehold.it/500x100" alt="" />
+      <!-- <img class="img-responsive col-sm-9" src="http://placehold.it/500x100" alt="" /> -->
     </div>
   </div>
+  <div class="container">
+          <h3 class="bluefont">
+            Graduation and Enrollment Rate Comparisons
+          </h3>
+          <p>
+              How does my high school or district compare to others in the state?  In these graphs, the circles fill according to the relative standing of the high school or district selected, subject to the filter chosen.  If a circle fills half way, the selected school or district is about average for Oregon.  Filling past that point indicates that the institution is performing at a higher-than-average rate.
+          </p>
+          <p>
+              As obtaining enough data to make a meaningful statement about rates is not always possible, we've had to remove some schools and districts from the list.  As better data becomes available, we hope to add schools and filters to the options to learn more about performance.
+          </p>
+        <div class="img-responsive col-sm-12" id="comparison-filter"></div>
+        <div>
+            <h2 id='comparison-count'></h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="dial" id="grad-rate"></div>
+                    <h4 class="text-center">High School Graduation Rate</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="dial" id="four-rate"></div>
+                    <h4 class="text-center">4 Year Graduation Rate</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="dial" id="two-rate"></div>
+                    <h4 class="text-center">2 Year Graduation Rate</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="dial" id="poverty-rate"></div>
+                    <h4 class="text-center">Poverty Rate</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="dial" id="post-enroll-rate"></div>
+                    <h4 class="text-center">Post-Secondary Enroll Rate</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="dial" id="HLAA-rate"></div>
+                    <h4 class="text-center">Highest Level Enrolled Was Achieved</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/comparisonDials.js"></script>
   <div class="footer">
     <center>
       <h2>Join the conversation</h2>
@@ -87,7 +134,56 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   <script src="../js/timeDistributionGraph.js"></script>
+  <script src="../js/buildFilterControls.js"></script>
   <script>
+    var comparisonFilters = {
+          gender: '',
+          ethnicity: '',
+          poverty: '',
+          lep: '',
+          meet_math: '',
+          meet_read: '',
+          district: 'Amity_SD_4J',
+          hs_name: '',
+          query: function () {
+              var params = [];
+              for (var key in this) {
+                  if (typeof this[key] !== 'function' && this[key]) {
+                      // if the value contains commas treat it as a list
+                      if (this[key].indexOf(',') == -1) {
+                          params.push('&' + key + '=' + this[key]);
+                      } else {
+                          var splitValue = this[key].split(',');
+                          splitValue.forEach(function(value) {
+                              params.push('&' + key + '=' + value);
+                          });
+                      }
+                  }
+              }
+              var group = '';
+              if (comparisonFilters.district === '') {
+                  group = 'hs_name';
+              } else {
+                  group = 'district';
+              }
+              current_rates = rowSelect(
+                  rates_array,
+                  params.slice(0, -1).join(separator=""),
+                  group
+              );
+              return params.join(separator="");
+          },
+          redraw: function() {
+          var group = '';
+              if (comparisonFilters.district === '') {
+                  group = 'hs_name';
+              } else {
+                  group = 'district';
+              }
+              updateData();
+          }
+      };
+    buildComparisonFilterControls("comparison-filter", comparisonFilters);
     createDistributionGraph("#td-4yr", "../data/4yrbardata.csv");
     createDistributionGraph("#td-2yr", "../data/2yrbardata.csv");
     createDistributionGraph("#td-hs", "../data/triedbardata.csv");
