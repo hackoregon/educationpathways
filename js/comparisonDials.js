@@ -99,10 +99,10 @@ var arc = d3.svg.arc()
     .outerRadius(width * .475)
     .startAngle(-Math.PI / 2);
 
-var thinArc = d3.svg.arc()
-    .innerRadius(width / 3)
-    .outerRadius(width * .35)
-    .startAngle(-Math.PI / 2);
+// var thinArc = d3.svg.arc()
+//     .innerRadius(width / 3)
+//     .outerRadius(width * .35)
+//     .startAngle(-Math.PI / 2);
 
 
 var updateGradRate = createGraph('grad-rate');
@@ -111,7 +111,6 @@ var updateTwoRate = createGraph('two-rate');
 var updatePovertyRate = createGraph('poverty-rate');
 var updatePostEnrollRate = createGraph('post-enroll-rate');
 var updateHLAARate = createGraph('HLAA-rate');
-var filter = "";
 var group = "hs_name";
 var rates_array = [];
 var current_rates = {};
@@ -134,7 +133,7 @@ d3.csv('data/rate_distributions.csv', function (data) {
     });
     rates_array = data;
     //create filters / select initial row
-    distributions = rowSelect(data, filter, group);
+    current_rates = rowSelect(data, "", group);
     //updatecharts
     updateData();
 });
@@ -186,16 +185,16 @@ function updateData() {
             HLAA_rate = (graduated_4_yr + grad_2_only) / (enrolled_2_yr + enrolled_4_yr)
         }
         document.getElementById('comparison-count').innerHTML = "Scale: " + total_students + " students"
-        updateGradRate(zScore(distributions.grad_rate_mean, distributions.grad_rate_sd, grad_rate));
-        updateFourRate(zScore(distributions.four_rate_mean, distributions.four_rate_sd, four_rate));
-        updateTwoRate(zScore(distributions.two_rate_mean, distributions.two_rate_sd, two_rate));
+        updateGradRate(zScore(current_rates.grad_rate_mean, current_rates.grad_rate_sd, grad_rate));
+        updateFourRate(zScore(current_rates.four_rate_mean, current_rates.four_rate_sd, four_rate));
+        updateTwoRate(zScore(current_rates.two_rate_mean, current_rates.two_rate_sd, two_rate));
         updatePovertyRate(0.34);
-        updatePostEnrollRate(zScore(distributions.post_enroll_rate_mean, distributions.post_enroll_rate_sd, post_enroll_rate));
+        updatePostEnrollRate(zScore(current_rates.post_enroll_rate_mean, current_rates.post_enroll_rate_sd, post_enroll_rate));
         if (HLAA_rate === -1) {
             updateHLAARate(-3);
             return;
         }
-        updateHLAARate(zScore(distributions.HLAA_rate_mean, distributions.HLAA_rate_sd, HLAA_rate));
+        updateHLAARate(zScore(current_rates.HLAA_rate_mean, current_rates.HLAA_rate_sd, HLAA_rate));
     });
 }
 
@@ -238,10 +237,10 @@ function createGraph(id) {
         .attr("d", arc);
 
     // Add an inner 'outline' circle for ??clarity??
-    var outline = svg.append("path")
-        .datum({endAngle: Math.PI / 2})
-        .style("fill", "#808285")
-        .attr("d", thinArc);
+    // var outline = svg.append("path")
+    //     .datum({endAngle: Math.PI / 2})
+    //     .style("fill", "#808285")
+    //     .attr("d", thinArc);
 
     // Add the foreground arc in gold, starting at 0 for update effect.
     var foreground = svg.append("path")
@@ -253,7 +252,7 @@ function createGraph(id) {
         .attr("xlink:href", "img/icons/" + id + ".svg")
         .attr("width", width / 4)
         .attr("height", width / 4)
-        .attr("transform", "translate(" + -width / 8 + "," + -width / 6 + ")")
+        .attr("transform", "translate(" + -width / 8 + "," + -3 * width / 16 + ")")
 
     // creates the desired movement effect on value update.
     function arcTween(transition, newAngle) {
@@ -270,9 +269,23 @@ function createGraph(id) {
     // then updates the chart to reflect the new value.
     return function arcUpdate(value) {
       if (value === -3) {
-          background.style("fill", "#808285")
+        background.transition()
+            .style("fill", "#808285")
+            .style("opacity", 0.25)
+        foreground.transition()
+            .style("fill", "#808285")
+            .style("opacity", 0.25)
+        icon.transition()
+            .style("opacity", 0.25)
       } else {
-          background.style("fill", "#fff")
+        background.transition()
+            .style("fill", "#fff")
+            .style("opacity", 1)
+        foreground.transition()
+            .style("fill", "#dcc871")
+            .style("opacity", 1)
+        icon.transition()
+            .style("opacity", 1)
       }
       foreground.transition()
           .duration(750)

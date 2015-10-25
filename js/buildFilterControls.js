@@ -128,7 +128,7 @@ function buildComparisonFilterControls(divId, filterObject) {
             o = document.createElement('option');
             o.appendChild(document.createTextNode(filterLabels['ethnicity'] + ": " + "Non-White"));
             select.appendChild(o);
-            o.value = "ethnicity:1,2,3,4,6,7";
+            o.value = "ethnicity:1,2,3,4,6";
         }
         // end wonky part
         else {

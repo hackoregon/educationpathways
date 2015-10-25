@@ -205,6 +205,17 @@
                       }
                   }
               }
+              var group = '';
+              if (comparisonFilters.district = '') {
+                  group = 'hs_name';
+              } else {
+                  group = 'district';
+              }
+              current_rates = rowSelect(
+                  rates_array,
+                  params.slice(0, -1).join(separator=""),
+                  group
+              );
               return params.join(separator="");
           },
           redraw: function() {
