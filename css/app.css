@@ -3,6 +3,14 @@
 body {
   font-family: 'Lato', sans-serif;
 }
+a {
+    color: #5cbc87;
+}
+
+a:hover {
+    color: #40845E;
+
+}
 .nav ul {
   list-style: none;
   background-color: #dcc871;
@@ -90,15 +98,6 @@ a .grayfont:hover {
 a .bluefont:hover {
   color: #0D3E50;
 }
-
-a {
-    color: #5cbc87;
-}
-
-a:hover {
-    color: #40845E;
-
-}
 .greenfont {
   color: #5cbc87;
 }
@@ -138,6 +137,9 @@ g.g > rect {
   background-color: #dcc871;
   font-family: 'Lato', sans-serif;
   color: #156786;
+}
+.footer-brand {
+  height
 }
 .footer .fa {
   color: #15678B;
