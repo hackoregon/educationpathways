@@ -169,3 +169,6 @@ g.g > rect {
   color: #15678B;
   margin: 0px 10px 10px 10px;
 }
+.footer .row{
+  margin-right: 0px;
+}
