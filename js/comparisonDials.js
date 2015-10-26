@@ -99,10 +99,15 @@ var arc = d3.svg.arc()
     .outerRadius(width * .475)
     .startAngle(-Math.PI / 2);
 
-// var thinArc = d3.svg.arc()
-//     .innerRadius(width / 3)
-//     .outerRadius(width * .35)
-//     .startAngle(-Math.PI / 2);
+var thinnerArc = d3.svg.arc()
+    .innerRadius(width / 3)
+    .outerRadius(width / 3 + 1)
+    .startAngle(-Math.PI / 2);
+
+var thouterArc = d3.svg.arc()
+    .innerRadius(width * .475 - 1)
+    .outerRadius(width * .475)
+    .startAngle(-Math.PI / 2);
 
 
 var updateGradRate = createGraph('grad-rate');
@@ -218,10 +223,11 @@ function updateData() {
         updateTwoRate(zScore(current_rates.two_rate_mean, current_rates.two_rate_sd, two_rate));
         if (poverty_rate === -1) {
             updatePovertyRate(-3);
-        } else if (group === 'hs_name') {
-            updatePovertyRate(zScore(hs_pov_mean, hs_pov_sd, poverty_rate));
         } else {
-            updatePovertyRate(zScore(dist_pov_mean, dist_pov_sd, poverty_rate));
+            if (poverty_rate < 0.1) {
+                poverty_rate = 0.1 / 6
+            }
+            updatePovertyRate(poverty_rate * 6 - 3);
         }
         updatePostEnrollRate(zScore(current_rates.post_enroll_rate_mean, current_rates.post_enroll_rate_sd, post_enroll_rate));
         if (HLAA_rate === -1) {
@@ -270,11 +276,16 @@ function createGraph(id) {
         .style("fill", "#fff")
         .attr("d", arc);
 
-    // Add an inner 'outline' circle for ??clarity??
+    // Add outline circles for definition
+    var inline = svg.append("path")
+        .datum({endAngle: 5 * Math.PI / 2})
+        .style("fill", "#808285")
+        .attr("d", thinnerArc);
+
     // var outline = svg.append("path")
-    //     .datum({endAngle: Math.PI / 2})
+    //     .datum({endAngle: 5 * Math.PI / 2})
     //     .style("fill", "#808285")
-    //     .attr("d", thinArc);
+    //     .attr("d", thouterArc);
 
     // Add the foreground arc in gold, starting at 0 for update effect.
     var foreground = svg.append("path")
@@ -311,6 +322,10 @@ function createGraph(id) {
             .style("opacity", 0.25)
         icon.transition()
             .style("opacity", 0.25)
+        inline.transition()
+            .style("opacity", 0)
+        // outline.transition()
+        //     .style("opacity", 0)
       } else {
         background.transition()
             .style("fill", "#fff")
@@ -320,6 +335,10 @@ function createGraph(id) {
             .style("opacity", 1)
         icon.transition()
             .style("opacity", 1)
+        inline.transition()
+            .style("opacity", 1)
+        // outline.transition()
+        //     .style("opacity", 1)
       }
       foreground.transition()
           .duration(750)

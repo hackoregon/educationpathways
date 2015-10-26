@@ -13,55 +13,6 @@ var filterLabels = {
     hs_name: "High School"
 };
 
-function buildSankeyFilterControls(divId, filterObject) {
-    var root = document.getElementById(divId);
-
-    // We're doing this in two passes - create SELECTs, then populate controls - so that the
-    // SELECTs always appear on the page in the same order.
-    Object.keys(filterObject).forEach(function (filter) {
-        if (typeof filterObject[filter] === 'function') {
-            return;
-        }
-        var select = document.createElement('select');
-        select.setAttribute('id', divId + '-select-' + filter);
-
-        var nofilter = document.createElement('option');
-        nofilter.appendChild(document.createTextNode('No filter'));
-        select.appendChild(nofilter);
-        nofilter.value = 'clear';
-
-        select.addEventListener('change', function (e) {
-            if ('clear' === e.target.value)
-                filterObject[filter] = '';
-            else
-                filterObject[filter] = e.target.value;
-            filterObject.redraw();
-        });
-
-        var label = document.createElement('label');
-        label.appendChild(document.createTextNode(filterLabels[filter]));
-        label.appendChild(document.createElement("br"));
-        label.appendChild(select);
-        root.appendChild(label);
-        root.appendChild(document.createElement("br"));
-    });
-
-    Object.keys(filterObject).forEach(function (filter) {
-        if (typeof filterObject[filter] === 'function') {
-            return;
-        }
-        d3.json(url + '/meta/' + filter + '/?format=json', function (filterOptions) {
-            var select = document.getElementById(divId + '-select-' + filter);
-            for (var key in filterOptions) {
-                var option = document.createElement('option');
-                option.appendChild(document.createTextNode(filterOptions[key]));
-                select.appendChild(option);
-                option.value = key;
-            }
-        });
-    });
-}
-
 function buildComparisonFilterControls(divId, filterObject) {
     // Create one SELECT with all of the options from all filter criteria except 'district' and 'hs_name'
     var root = document.getElementById(divId);
@@ -99,13 +50,14 @@ function buildComparisonFilterControls(divId, filterObject) {
         }
         filterObject.redraw();
     });
-
+    var container = document.createElement('div');
+    container.setAttribute('class', 'filter-container')
     var label = document.createElement('label');
     label.appendChild(document.createTextNode('Comparison criteria'));
     label.appendChild(document.createElement("br"));
-    label.appendChild(select);
-    root.appendChild(label);
-    root.appendChild(document.createElement("br"));
+    container.appendChild(label);
+    container.appendChild(select);
+    root.appendChild(container);
 
     Object.keys(filterObject).forEach(function (filter) {
         // begin wonky part - need to hand-wire these options and not take the options from the API.  Has to be done
@@ -164,6 +116,8 @@ function buildComparisonFilterControls(divId, filterObject) {
         if (typeof filterObject[filter] === 'function') {
             return;
         }
+        var wrapper = document.createElement('div');
+        wrapper.setAttribute('class', 'filter-container')
         var s = document.createElement('select');
         s.setAttribute('id', divId + '-compareselect-' + filter);
 
@@ -204,10 +158,9 @@ function buildComparisonFilterControls(divId, filterObject) {
 
         var l = document.createElement('label');
         l.appendChild(document.createTextNode(filterLabels[filter]));
-        l.appendChild(document.createElement("br"));
-        l.appendChild(s);
-        root.appendChild(l);
-        root.appendChild(document.createElement("br"));
+        wrapper.appendChild(l);
+        wrapper.appendChild(s);
+        root.appendChild(wrapper);
     });
 
     remainingCriteria.forEach(function(filter, filterIdx) {
