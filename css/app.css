@@ -70,9 +70,13 @@ a:hover {
   }
 }
 /*fit header logo to screen size < 495*/
-img.header-logo{
+img.header-logo {
   width: auto;
   height: auto;
+}
+img.hack-logo {
+  height: 56px;
+  width: auto;
 }
 @media screen and (max-width: 495px) {
   img.header-logo{
