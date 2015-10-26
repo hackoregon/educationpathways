@@ -3,6 +3,14 @@
 body {
   font-family: 'Lato', sans-serif;
 }
+a {
+    color: #5cbc87;
+}
+
+a:hover {
+    color: #40845E;
+
+}
 .nav ul {
   list-style: none;
   background-color: #dcc871;
@@ -10,7 +18,7 @@ body {
   padding: 0;
 }
 .nav img.brand {
-
+ margin-bottom: 5px
 }
 .nav li {
   font-size: 16px;
@@ -129,6 +137,11 @@ g.g > rect {
   background-color: #dcc871;
   font-family: 'Lato', sans-serif;
   color: #156786;
+}
+.footer-brand {
+  height: 56px;
+  margin: 10px 10px 10px 10px;
+  text-align: center;
 }
 .footer .fa {
   color: #15678B;
