@@ -120,7 +120,6 @@ var group = "hs_name";
 var rates_array = [];
 var current_rates = [];
 var poverty_rates = [];
-var current_poverty = 0;
 var hs_pov_mean = 0;
 var hs_pov_sd = 0;
 var dist_pov_mean = 0;
@@ -180,11 +179,17 @@ function updateData() {
         var total_students = hs_grads + hs_dropouts;
         if (total_students < 1) {
             updateGradRate(-3);
+            document.getElementById('grad-rate-span').innerHTML = 'N/A'
             updateFourRate(-3);
+            document.getElementById('two-rate-span').innerHTML = 'N/A'
             updateTwoRate(-3);
+            document.getElementById('four-rate-span').innerHTML = 'N/A'
             updatePovertyRate(-3);
+            document.getElementById('poverty-rate-span').innerHTML = 'N/A'
             updatePostEnrollRate(-3);
+            document.getElementById('post-enroll-rate-span').innerHTML = 'N/A'
             updateHLAARate(-3);
+            document.getElementById('HLAA-rate-span').innerHTML = 'N/A'
             document.getElementById('comparison-count').innerHTML = "Scale: " + total_students + " students"
             return;
         }
@@ -219,22 +224,34 @@ function updateData() {
         }
         document.getElementById('comparison-count').innerHTML = "Scale: " + total_students + " students"
         updateGradRate(zScore(current_rates.grad_rate_mean, current_rates.grad_rate_sd, grad_rate));
+        document.getElementById('grad-rate-span').innerHTML = Math.round(grad_rate * 1000) / 10 + '%'
         updateFourRate(zScore(current_rates.four_rate_mean, current_rates.four_rate_sd, four_rate));
+        document.getElementById('four-rate-span').innerHTML = Math.round(four_rate * 1000) / 10 + '%'
         updateTwoRate(zScore(current_rates.two_rate_mean, current_rates.two_rate_sd, two_rate));
+        document.getElementById('two-rate-span').innerHTML = Math.round(two_rate * 1000) / 10 + '%'
         if (poverty_rate === -1) {
             updatePovertyRate(-3);
+            document.getElementById('poverty-rate-span').innerHTML = 'N/A'
         } else {
+            document.getElementById('poverty-rate-span').innerHTML = Math.round(poverty_rate * 1000) / 10 + '%'
             if (poverty_rate < 0.1) {
                 poverty_rate = 0.1 / 6
             }
-            updatePovertyRate(poverty_rate * 6 - 3);
+            if (group === 'hs_name') {
+                updatePovertyRate(zScore(hs_pov_mean, hs_pov_sd, poverty_rate));
+            } else {
+                updatePovertyRate(zScore(dist_pov_mean, dist_pov_sd, poverty_rate));
+            }
         }
         updatePostEnrollRate(zScore(current_rates.post_enroll_rate_mean, current_rates.post_enroll_rate_sd, post_enroll_rate));
+        document.getElementById('post-enroll-rate-span').innerHTML = Math.round(post_enroll_rate * 1000) / 10 + '%'
         if (HLAA_rate === -1) {
             updateHLAARate(-3);
+            document.getElementById('HLAA-rate-span').innerHTML = 'N/A'
             return;
         }
         updateHLAARate(zScore(current_rates.HLAA_rate_mean, current_rates.HLAA_rate_sd, HLAA_rate));
+        document.getElementById('HLAA-rate-span').innerHTML = Math.round(HLAA_rate * 1000) / 10 + '%'
     });
 }
 
