@@ -141,7 +141,13 @@ g.g > rect {
 .footer-brand {
   height: 56px;
   margin: 10px 10px 10px 10px;
-  text-align: center;
+}
+.footer-hack-or{
+  height: 56px;
+  margin: 10px 10px 10px 10px;
+}
+.footer-links {
+  text-align: right;
 }
 .footer .fa {
   color: #15678B;
