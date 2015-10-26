@@ -120,71 +120,84 @@
         </div>
     </div>
     <script src="../js/comparisonDials.js"></script>
-  <div class="footer">
-    <center>
-      <h2>Join the conversation</h2>
-      <p>
-        <div class="socialbuttons"><p>
-        <a href="https://twitter.com/HackOregon"><i class="fa fa-twitter fa-4x"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="mailto:catherine@hackoregon.org"><i class="fa fa-envelope-o fa-4x"></i></a></p>
+    <!-- footer -->
+    <div class="footer">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
+          <a href="./">
+            <img class="footer-brand" src="../img/40_40_100_logo.png" alt="Forty Forty One Hundred" />
+          </a>
         </div>
-    </center>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-  <script src="../js/timeDistributionGraph.js"></script>
-  <script src="../js/buildFilterControls.js"></script>
-  <script>
-    var comparisonFilters = {
-          gender: '',
-          ethnicity: '',
-          poverty: '',
-          lep: '',
-          meet_math: '',
-          meet_read: '',
-          district: 'Amity_SD_4J',
-          hs_name: '',
-          query: function () {
-              var params = [];
-              for (var key in this) {
-                  if (typeof this[key] !== 'function' && this[key]) {
-                      // if the value contains commas treat it as a list
-                      if (this[key].indexOf(',') == -1) {
-                          params.push('&' + key + '=' + this[key]);
-                      } else {
-                          var splitValue = this[key].split(',');
-                          splitValue.forEach(function(value) {
-                              params.push('&' + key + '=' + value);
-                          });
-                      }
-                  }
-              }
-              var group = '';
-              if (comparisonFilters.district === '') {
-                  group = 'hs_name';
-              } else {
-                  group = 'district';
-              }
-              current_rates = rowSelect(
-                  rates_array,
-                  params.slice(0, -1).join(separator=""),
-                  group
-              );
-              return params.join(separator="");
-          },
-          redraw: function() {
-          var group = '';
-              if (comparisonFilters.district === '') {
-                  group = 'hs_name';
-              } else {
-                  group = 'district';
-              }
-              updateData();
-          }
-      };
-    buildComparisonFilterControls("comparison-filter", comparisonFilters);
-    createDistributionGraph("#td-4yr", "../data/4yrbardata.csv");
-    createDistributionGraph("#td-2yr", "../data/2yrbardata.csv");
-    createDistributionGraph("#td-hs", "../data/triedbardata.csv");
-  </script>
+        <div class="col-sm-6 footer-links">
+          <a href="http://www.hackoregon.org/">
+            <img class="footer-hack-or" src="../img/hackoregon.png" alt="Hack Oregon" />
+          </a>
+          <a href="https://twitter.com/HackOregon">
+            <i class="fa fa-twitter fa-3x"></i>
+          </a>
+          <a href="mailto:catherine@hackoregon.org">
+            <i class="fa fa-envelope-o fa-3x"></i>
+          </a>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="../js/timeDistributionGraph.js"></script>
+    <script src="../js/buildFilterControls.js"></script>
+    <script>
+      var comparisonFilters = {
+            gender: '',
+            ethnicity: '',
+            poverty: '',
+            lep: '',
+            meet_math: '',
+            meet_read: '',
+            district: 'Amity_SD_4J',
+            hs_name: '',
+            query: function () {
+                var params = [];
+                for (var key in this) {
+                    if (typeof this[key] !== 'function' && this[key]) {
+                        // if the value contains commas treat it as a list
+                        if (this[key].indexOf(',') == -1) {
+                            params.push('&' + key + '=' + this[key]);
+                        } else {
+                            var splitValue = this[key].split(',');
+                            splitValue.forEach(function(value) {
+                                params.push('&' + key + '=' + value);
+                            });
+                        }
+                    }
+                }
+                var group = '';
+                if (comparisonFilters.district === '') {
+                    group = 'hs_name';
+                } else {
+                    group = 'district';
+                }
+                current_rates = rowSelect(
+                    rates_array,
+                    params.slice(0, -1).join(separator=""),
+                    group
+                );
+                return params.join(separator="");
+            },
+            redraw: function() {
+            var group = '';
+                if (comparisonFilters.district === '') {
+                    group = 'hs_name';
+                } else {
+                    group = 'district';
+                }
+                updateData();
+            }
+        };
+      buildComparisonFilterControls("comparison-filter", comparisonFilters);
+      createDistributionGraph("#td-4yr", "../data/4yrbardata.csv");
+      createDistributionGraph("#td-2yr", "../data/2yrbardata.csv");
+      createDistributionGraph("#td-hs", "../data/triedbardata.csv");
+    </script>
   </body>
 </html>
