@@ -137,12 +137,31 @@ g.g > rect {
   background-color: #dcc871;
   font-family: 'Lato', sans-serif;
   color: #156786;
+  margin-top: 8px;
 }
 .footer-brand {
   height: 56px;
-  margin: 10px 10px 10px 10px;
-  text-align: center;
+  margin: 15px 10px 10px 10px;
 }
-.footer .fa {
+.footer-hack-or{
+  height: 45px;
+  margin: -15px 15px 10px 10px;
+  vertical-align: none;
+}
+@media screen and (min-width: 768px) {
+  .footer-links {
+		text-align: right;
+  }
+}
+@media screen and (max-width: 767px) {
+  .footer {
+    text-align: center;
+  }
+}
+.footer-links {
+  margin: 25px 15px 10px 10px;
+}
+.footer i.fa {
   color: #15678B;
+  margin: 0px 10px 10px 10px;
 }
