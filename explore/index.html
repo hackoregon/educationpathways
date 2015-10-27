@@ -26,65 +26,80 @@
       </ul>
     </div>
   <div class="container">
-    <h2 class="bluefont">
-      About These Data Visualizations
-    </h2>
-    <p>
-      The dataset includes 41,603 de-identified Oregon students scheduled to graduate high school in 2006. The records document key demographic characteristics, assessed math and reading proficiency resulting from tests completed in 2003, and college enrollment and degree attainments through 2014.
-    </p>
-    <p>
-      To protect student privacy, Education Pathways only receives aggregated, non student-level data.
-    </p>
-    <p>
-      In filtering the data, users should be aware:
-    </p>
-      <ul>
-        <li>Certain filter selections will return zero results for sufficiently small sample sizes or other cases where student anonymity may be at risk.</li>
-        <li>The number of credentials in each category shown reflect the total number of students for whom that credential was their highest credential attained, not the total number of degrees awarded.</li>
-      </ul>
-    </p>
-  </div>
-  <div class="container">
-
-    <h2 class="bluefont">
-      How Are Students Moving Through the Education Process?
-    </h2>
-    <p>
-      The dynamic graphic below is called a Sankey diagram. It provides an effective way to see how different groups of students achieved a range of educational credentials and degrees over nearly a decade (2006-2014).
-    </p>
-    <p>
-      The data can be filtered by a range of student demographic characteristics, by district and school, and by credential or degree, using the tools below.
-    </p>
-    <p>
-      The “Scale” on the left indicates the total number of students for which the diagrams displays the pathways. The numbers of students reflected in each vertical bar are visible by hovering your cursor over the bar.
-    </p>
-    <p>
-      Explore!
-    </p>
-  </div>
-  <div class="container">
-    <!-- start of sankey dom elements -->
-    <div id="filters">
-      <h3>Filters</h3>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="bluefont">
+          About These Data Visualizations
+        </h2>
+        <p>
+          The dataset includes 41,603 de-identified Oregon students scheduled to graduate high school in 2006. The records document key demographic characteristics, assessed math and reading proficiency resulting from tests completed in 2003, and college enrollment and degree attainments through 2014.
+        </p>
+        <p>
+          To protect student privacy, Education Pathways only receives aggregated, non student-level data.
+        </p>
+        <p>
+          In filtering the data, users should be aware:
+        </p>
+          <ul>
+            <li>Certain filter selections will return zero results for sufficiently small sample sizes or other cases where student anonymity may be at risk.</li>
+            <li>The number of credentials in each category shown reflect the total number of students for whom that credential was their highest credential attained, not the total number of degrees awarded.</li>
+          </ul>
+        </p>
+      </div>
     </div>
-    <h2>Scale: <span id="scale"></span></h2>
-    <div>
-      <div id="pathfilters" class="tabs"></div>
-    </div>
-    <div id="chart"></div>
-    <script type="text/javascript" src="http://bryzaguy.github.io/oregon-learns-chart/app.js" charset="utf-8"></script>
-    <!-- end of sankey dom elements -->
   </div>
   <div class="container">
-    <h2 class="bluefont">
-      How Long Are Students Staying In School?
-    </h2>
-    <p>
-      In the following bar charts, we look at three groups: those that graduate from a four year institution, those that graduate from a two year institution, and those that attend a post-secondary school but do not obtain a degree.
-    </p>
-    <p>
-        In these graphs, "Calendar Years" refers to the time that passes between the first time a student enrolls and when they graduate or otherwise move on.  "Enrolled Years" discounts from this the time spent not enrolled in a school.
-    </p>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="bluefont">
+          How Are Students Moving Through the Education Process?
+        </h2>
+        <p>
+          The dynamic graphic below is called a Sankey diagram. It provides an effective way to see how different groups of students achieved a range of educational credentials and degrees over nearly a decade (2006-2014).
+        </p>
+        <p>
+          The data can be filtered by a range of student demographic characteristics, by district and school, and by credential or degree, using the tools below.
+        </p>
+        <p>
+          The “Scale” on the left indicates the total number of students for which the diagrams displays the pathways. The numbers of students reflected in each vertical bar are visible by hovering your cursor over the bar.
+        </p>
+        <p>
+          Explore!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <!-- start of sankey dom elements -->
+      <div id="filters" class="col-md-3">
+        <h2>Filters</h2>
+      </div>
+      <div class="col-md-9">
+        <h2>Scale: <span id="scale"></span></h2>
+        <div>
+          <div id="pathfilters" class="tabs"></div>
+        </div>
+        <div id="chart"></div>
+        <script type="text/javascript" src="http://bryzaguy.github.io/oregon-learns-chart/app.js" charset="utf-8"></script>
+      </div>
+      <!-- end of sankey dom elements -->
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="bluefont">
+          How Long Are Students Staying In School?
+        </h2>
+        <p>
+          In the following bar charts, we look at three groups: those that graduate from a four year institution, those that graduate from a two year institution, and those that attend a post-secondary school but do not obtain a degree.
+        </p>
+        <p>
+            In these graphs, "Calendar Years" refers to the time that passes between the first time a student enrolls and when they graduate or otherwise move on.  "Enrolled Years" discounts from this the time spent not enrolled in a school.
+        </p>
+      </div>
+    </div>
   </div>
   <div class="container">
     <div class="row">
@@ -100,50 +115,54 @@
     </div>
   </div>
   <div class="container">
-          <h2 class="bluefont">
-            How Does a High School or District Compare in Oregon?
-          </h2>
-          <p>
-            In these graphs, the circles fill according to the relative standing of the high school or district selected.  If a circle fills half way, the selected school or district is about average for Oregon.  Filling past that point indicates that the institution is performing at a higher-than-average rate.
-          </p>
-          <p>
-            As obtaining enough data to make a meaningful statement about rates is not always possible, we've had to remove some schools and districts from the list.  As better data becomes available, we hope to add schools and filters to the options to learn more about performance.
-          </p>
-        <div class="img-responsive col-sm-12" id="comparison-filter">
-            <h2>Filters</h2>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="bluefont">
+          How Does a High School or District Compare in Oregon?
+        </h2>
+        <p>
+          In these graphs, the circles fill according to the relative standing of the high school or district selected.  If a circle fills half way, the selected school or district is about average for Oregon.  Filling past that point indicates that the institution is performing at a higher-than-average rate.
+        </p>
+        <p>
+          As obtaining enough data to make a meaningful statement about rates is not always possible, we've had to remove some schools and districts from the list.  As better data becomes available, we hope to add schools and filters to the options to learn more about performance.
+        </p>
+      </div>
+      <div class="img-responsive col-sm-3" id="comparison-filter">
+          <h2>Filters</h2>
+      </div>
+      <div class="col-sm-9">
+        <h2 id='comparison-count'></h2>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="dial" id="grad-rate"></div>
+            <h4 class="text-center">High School Graduation: <span id="grad-rate-span"></span></h4>
+          </div>
+          <div class="col-sm-4">
+            <div class="dial" id="four-rate"></div>
+            <h4 class="text-center">4 Year Graduation: <span id="four-rate-span"></span></h4>
+          </div>
+          <div class="col-sm-4">
+            <div class="dial" id="two-rate"></div>
+            <h4 class="text-center">2 Year Graduation: <span id="two-rate-span"></span></h4>
+          </div>
         </div>
-        <div class="col-sm-12">
-            <h2 id='comparison-count'></h2>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="dial" id="grad-rate"></div>
-                    <h4 class="text-center">High School Graduation: <span id="grad-rate-span"></span></h4>
-                </div>
-                <div class="col-sm-4">
-                    <div class="dial" id="four-rate"></div>
-                    <h4 class="text-center">4 Year Graduation: <span id="four-rate-span"></span></h4>
-                </div>
-                <div class="col-sm-4">
-                    <div class="dial" id="two-rate"></div>
-                    <h4 class="text-center">2 Year Graduation: <span id="two-rate-span"></span></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="dial" id="poverty-rate"></div>
-                    <h4 class="text-center">Poverty Rate: <span id="poverty-rate-span"></span></h4>
-                </div>
-                <div class="col-sm-4">
-                    <div class="dial" id="post-enroll-rate"></div>
-                    <h4 class="text-center">Post-Secondary Enrollment: <span id="post-enroll-rate-span"></span></h4>
-                </div>
-                <div class="col-sm-4">
-                    <div class="dial" id="HLAA-rate"></div>
-                    <h4 class="text-center">Highest Level Enrolled Was Achieved: <span id="HLAA-rate-span"></span></h4>
-                </div>
-            </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="dial" id="poverty-rate"></div>
+            <h4 class="text-center">Poverty Rate: <span id="poverty-rate-span"></span></h4>
+          </div>
+          <div class="col-sm-4">
+            <div class="dial" id="post-enroll-rate"></div>
+            <h4 class="text-center">Post-Secondary Enrollment: <span id="post-enroll-rate-span"></span></h4>
+          </div>
+          <div class="col-sm-4">
+            <div class="dial" id="HLAA-rate"></div>
+            <h4 class="text-center">Highest Level Enrolled Was Achieved: <span id="HLAA-rate-span"></span></h4>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
     <script src="../js/comparisonDials.js"></script>
     <!-- footer -->
     <div class="footer">
