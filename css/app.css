@@ -70,9 +70,13 @@ a:hover {
   }
 }
 /*fit header logo to screen size < 495*/
-img.header-logo{
+img.header-logo {
   width: auto;
   height: auto;
+}
+img.hack-logo {
+  height: 56px;
+  width: auto;
 }
 @media screen and (max-width: 495px) {
   img.header-logo{
@@ -164,4 +168,7 @@ g.g > rect {
 .footer i.fa {
   color: #15678B;
   margin: 0px 10px 10px 10px;
+}
+.footer .row{
+  margin-right: 0px;
 }
