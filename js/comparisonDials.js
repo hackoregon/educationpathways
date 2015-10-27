@@ -238,9 +238,9 @@ function updateData() {
                 poverty_rate = 0.1 / 6
             }
             if (group === 'hs_name') {
-                updatePovertyRate(zScore(hs_pov_mean, hs_pov_sd, poverty_rate));
+                updatePovertyRate(zScore(hs_pov_mean, -hs_pov_sd, poverty_rate));
             } else {
-                updatePovertyRate(zScore(dist_pov_mean, dist_pov_sd, poverty_rate));
+                updatePovertyRate(zScore(dist_pov_mean, -dist_pov_sd, poverty_rate));
             }
         }
         updatePostEnrollRate(zScore(current_rates.post_enroll_rate_mean, current_rates.post_enroll_rate_sd, post_enroll_rate));
