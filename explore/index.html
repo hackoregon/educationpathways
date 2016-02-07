@@ -239,6 +239,9 @@
             }
         };
       buildComparisonFilterControls("comparison-filter", comparisonFilters);
+      var clearFix = document.createElement('div');
+      clearFix.style.clear = 'both';
+      document.getElementById('comparison-filter').appendChild(clearFix)
       createDistributionGraph("#td-4yr", "../data/4yrbardata.csv");
       createDistributionGraph("#td-2yr", "../data/2yrbardata.csv");
       createDistributionGraph("#td-hs", "../data/triedbardata.csv");
