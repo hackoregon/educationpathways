@@ -173,7 +173,7 @@ function rowSelect(data, filter_str, group) {
 // passes the "score" of each rate relative to the rest of the scores in the
 // group to the respective update functions
 function updateData() {
-    d3.json(''.concat('http://52.10.251.161/sankey/?format=json', comparisonFilters.query()), function (error, data) {
+    d3.json(''.concat('https://educationpathwaysproxy--flamingveggies.repl.co/?format=json', comparisonFilters.query()), function (error, data) {
         var hs_grads = codeSum(filterData(transformData(data), ['G']));
         var hs_dropouts = codeSum(filterData(transformData(data), ['X']));
         var total_students = hs_grads + hs_dropouts;
