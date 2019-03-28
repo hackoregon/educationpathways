@@ -1,7 +1,7 @@
 /**
  * Created by cvonsee on 10/19/15.
  */
-var url = 'http://chrisv-cs-test.apigee.net/sankey';
+var url = 'https://educationpathwaysproxy--flamingveggies.repl.co';
 var filterLabels = {
     gender: "Gender",
     ethnicity: "Ethnicity",
